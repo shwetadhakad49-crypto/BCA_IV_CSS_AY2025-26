@@ -13,10 +13,8 @@
 
 ### For Instructors
 1. **Start Here:** Read [README.md](./README.md) for course overview
-2. **Understand Context:** Review [COPILOT_INSTRUCTIONS.md](./COPILOT_INSTRUCTIONS.md) - THIS IS CRITICAL
-3. **Set Up:** Follow [Guides/Google-Classroom-Integration.md](./Guides/Google-Classroom-Integration.md)
-4. **Deploy:** Use [Guides/GitHub-Classroom-Guide.md](./Guides/GitHub-Classroom-Guide.md)
-5. **Teach:** Deliver content from Week-1/ files
+2. **Deploy:** Use [Guides/GitHub-Classroom-Guide.md](./Guides/GitHub-Classroom-Guide.md)
+3. **Teach:** Deliver content from **Week-1/** files
 
 ### For Students
 1. **Join Classroom:** Code will be provided by instructor

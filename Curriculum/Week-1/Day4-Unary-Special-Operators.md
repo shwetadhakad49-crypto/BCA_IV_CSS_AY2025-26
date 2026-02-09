@@ -378,7 +378,230 @@ console.log("Handicapped: " + isHandicapped);
 console.log("Fee: ₹" + fee);
 ```
 
-### Exercise 4.7: Student Status Checker
+### Exercise 4.7: Temperature Converter (Official Experiment 6)
+
+**Goal:** Convert between Celsius and Fahrenheit with bidirectional conversion
+
+**Real-World Context:** Weather apps, scientific instruments, cooking recipes
+
+```javascript
+console.log("=== TEMPERATURE CONVERTER ===\n");
+
+// Method 1: Celsius to Fahrenheit
+console.log("--- Celsius to Fahrenheit ---");
+const celsius = 25;
+const fahrenheit = (celsius * 9/5) + 32;
+
+console.log(celsius + "°C = " + fahrenheit + "°F");
+console.log("Example: Room temperature (25°C) = " + fahrenheit + "°F");
+console.log();
+
+// Method 2: Fahrenheit to Celsius
+console.log("--- Fahrenheit to Celsius ---");
+const fahrenheitInput = 77;
+const celsiusOutput = (fahrenheitInput - 32) * 5/9;
+
+console.log(fahrenheitInput + "°F = " + celsiusOutput.toFixed(2) + "°C");
+console.log();
+
+// Function for conversion (with validation)
+function celsiusToFahrenheit(c) {
+    // Absolute zero is -273.15°C
+    if (c < -273.15) {
+        return "Error: Temperature below absolute zero!";
+    }
+    return (c * 9/5) + 32;
+}
+
+function fahrenheitToCelsius(f) {
+    // Absolute zero is -459.67°F
+    if (f < -459.67) {
+        return "Error: Temperature below absolute zero!";
+    }
+    return (f - 32) * 5/9;
+}
+
+// Test various temperatures
+console.log("--- Temperature Conversions ---");
+
+// Freezing point of water
+console.log("0°C = " + celsiusToFahrenheit(0) + "°F (Water freezes)");
+
+// Boiling point of water
+console.log("100°C = " + celsiusToFahrenheit(100) + "°F (Water boils)");
+
+// Body temperature
+console.log("37°C = " + celsiusToFahrenheit(37).toFixed(1) + "°F (Normal body temp)");
+
+// Room temperature
+console.log("20°C = " + celsiusToFahrenheit(20) + "°F (Comfortable room)");
+
+// Hot day
+console.log("40°C = " + celsiusToFahrenheit(40) + "°F (Very hot day)");
+console.log();
+
+// Reverse conversions
+console.log("--- Reverse Conversions ---");
+console.log("32°F = " + fahrenheitToCelsius(32) + "°C (Water freezes)");
+console.log("98.6°F = " + fahrenheitToCelsius(98.6).toFixed(1) + "°C (Body temp)");
+console.log("212°F = " + fahrenheitToCelsius(212) + "°C (Water boils)");
+console.log();
+```
+
+**Advanced: Weather Advisory System**
+```javascript
+function getWeatherAdvisory(celsius) {
+    let advisory;
+    
+    if (celsius < -20) {
+        advisory = "🥶 Extremely Cold - Stay indoors!";
+    } else if (celsius < 0) {
+        advisory = "❄️ Freezing - Wear heavy winter clothing";
+    } else if (celsius < 10) {
+        advisory = "🧥 Cold - Jacket recommended";
+    } else if (celsius < 20) {
+        advisory = "🌤️ Cool - Light jacket optional";
+    } else if (celsius < 25) {
+        advisory = "😊 Comfortable - Perfect weather!";
+    } else if (celsius < 30) {
+        advisory = "☀️ Warm - Light clothing recommended";
+    } else if (celsius < 35) {
+        advisory = "🌡️ Hot - Stay hydrated";
+    } else {
+        advisory = "🔥 Very Hot - Avoid outdoor activities!";
+    }
+    
+    const fahrenheit = celsiusToFahrenheit(celsius);
+    
+    console.log("=== WEATHER ADVISORY ===");
+    console.log("Temperature: " + celsius + "°C (" + fahrenheit.toFixed(1) + "°F)");
+    console.log("Advisory: " + advisory);
+    console.log();
+}
+
+// Test different temperatures
+getWeatherAdvisory(-25);  // Extremely cold
+getWeatherAdvisory(0);    // Freezing
+getWeatherAdvisory(15);   // Cool
+getWeatherAdvisory(22);   // Comfortable
+getWeatherAdvisory(38);   // Very hot
+```
+
+**Using Ternary Operators for Temperature Categories:**
+```javascript
+function categorizeTempWithTernary(celsius) {
+    const fahrenheit = (celsius * 9/5) + 32;
+    
+    // Categorize using ternary operators
+    const category = celsius < 0 ? "Freezing" :
+                    celsius < 15 ? "Cold" :
+                    celsius < 25 ? "Comfortable" :
+                    celsius < 35 ? "Hot" : "Very Hot";
+    
+    const emoji = celsius < 0 ? "❄️" :
+                 celsius < 15 ? "🧥" :
+                 celsius < 25 ? "😊" :
+                 celsius < 35 ? "☀️" : "🔥";
+    
+    return `${emoji} ${celsius}°C (${fahrenheit.toFixed(1)}°F) - ${category}`;
+}
+
+console.log("--- Temperature Categories ---");
+console.log(categorizeTempWithTernary(-5));
+console.log(categorizeTempWithTernary(10));
+console.log(categorizeTempWithTernary(20));
+console.log(categorizeTempWithTernary(30));
+console.log(categorizeTempWithTernary(40));
+console.log();
+```
+
+**Practice Challenges:**
+```javascript
+// Challenge 1: Create a function that handles invalid inputs
+function safeConvertToFahrenheit(input) {
+    if (typeof input !== "number") {
+        return "Error: Please provide a number";
+    }
+    if (input < -273.15) {
+        return "Error: Below absolute zero";
+    }
+    return (input * 9/5) + 32;
+}
+
+console.log(safeConvertToFahrenheit(25));      // Valid: 77
+console.log(safeConvertToFahrenheit("25"));    // Error: type
+console.log(safeConvertToFahrenheit(-300));    // Error: absolute zero
+
+// Challenge 2: Create a bidirectional converter
+function convertTemperature(value, fromUnit) {
+    if (fromUnit === "C") {
+        return {
+            celsius: value,
+            fahrenheit: (value * 9/5) + 32,
+            kelvin: value + 273.15
+        };
+    } else if (fromUnit === "F") {
+        const celsius = (value - 32) * 5/9;
+        return {
+            celsius: celsius,
+            fahrenheit: value,
+            kelvin: celsius + 273.15
+        };
+    } else {
+        return "Error: Invalid unit. Use 'C' or 'F'";
+    }
+}
+
+const temp1 = convertTemperature(25, "C");
+console.log("25°C =", temp1);
+// Output: { celsius: 25, fahrenheit: 77, kelvin: 298.15 }
+
+const temp2 = convertTemperature(77, "F");
+console.log("77°F =", temp2);
+// Output: { celsius: 25, fahrenheit: 77, kelvin: 298.15 }
+```
+
+**Real-World Application: Weather App Display**
+```javascript
+// Simulate weather data from API
+const cities = [
+    { name: "Mumbai", temp: 32 },
+    { name: "Delhi", temp: 38 },
+    { name: "Shimla", temp: 15 },
+    { name: "Manali", temp: 5 }
+];
+
+console.log("=== WEATHER DASHBOARD ===");
+cities.forEach(city => {
+    const fahrenheit = (city.temp * 9/5) + 32;
+    const advisory = city.temp < 10 ? "Cold ❄️" :
+                    city.temp < 25 ? "Pleasant 😊" :
+                    city.temp < 35 ? "Warm ☀️" : "Hot 🔥";
+    
+    console.log(`${city.name}: ${city.temp}°C (${fahrenheit.toFixed(1)}°F) - ${advisory}`);
+});
+```
+
+**Key Formulas to Remember:**
+```
+Celsius to Fahrenheit: F = (C × 9/5) + 32
+Fahrenheit to Celsius: C = (F - 32) × 5/9
+Celsius to Kelvin: K = C + 273.15
+```
+
+**Common Temperature Reference Points:**
+```javascript
+console.log("=== REFERENCE TEMPERATURES ===");
+console.log("Absolute Zero: -273.15°C = " + celsiusToFahrenheit(-273.15).toFixed(2) + "°F");
+console.log("Water Freezes: 0°C = " + celsiusToFahrenheit(0) + "°F");
+console.log("Room Temperature: 20°C = " + celsiusToFahrenheit(20) + "°F");
+console.log("Body Temperature: 37°C = " + celsiusToFahrenheit(37).toFixed(1) + "°F");
+console.log("Water Boils: 100°C = " + celsiusToFahrenheit(100) + "°F");
+```
+
+---
+
+### Exercise 4.8: Student Status Checker
 
 **Goal:** Combine multiple operators
 

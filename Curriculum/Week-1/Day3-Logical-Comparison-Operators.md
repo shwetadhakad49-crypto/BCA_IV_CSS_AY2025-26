@@ -369,6 +369,132 @@ console.log("Discount: ₹" + discountAmount.toFixed(2));
 console.log("Final Price: ₹" + finalPrice.toFixed(2));
 ```
 
+### Exercise 3.8: Swap Two Variables (Official Experiment 5)
+
+**Goal:** Learn different techniques to swap variable values
+
+**Real-World Analogy:** Trading seats in a classroom, exchanging gifts, swapping cards
+
+```javascript
+console.log("=== VARIABLE SWAPPING TECHNIQUES ===\n");
+
+// Method 1: Using a Temporary Variable (Most Common)
+console.log("--- Method 1: Temporary Variable ---");
+let a = 5;
+let b = 10;
+console.log("Before swap: a =", a, "b =", b);
+
+let temp = a;   // Store a in temporary variable
+a = b;          // Copy b to a
+b = temp;       // Copy temp (original a) to b
+
+console.log("After swap:  a =", a, "b =", b);
+console.log();
+
+// Method 2: Arithmetic Operations (No extra variable)
+console.log("--- Method 2: Arithmetic Operations ---");
+let x = 15;
+let y = 25;
+console.log("Before swap: x =", x, "y =", y);
+
+x = x + y;      // x = 15 + 25 = 40
+y = x - y;      // y = 40 - 25 = 15
+x = x - y;      // x = 40 - 15 = 25
+
+console.log("After swap:  x =", x, "y =", y);
+console.log();
+
+// Method 3: Destructuring (Modern JavaScript - ES6+)
+console.log("--- Method 3: Destructuring (Modern) ---");
+let num1 = 100;
+let num2 = 200;
+console.log("Before swap: num1 =", num1, "num2 =", num2);
+
+[num1, num2] = [num2, num1];   // Swap in one line!
+
+console.log("After swap:  num1 =", num1, "num2 =", num2);
+console.log();
+
+// Method 4: XOR Operator (For integers only - Advanced)
+console.log("--- Method 4: XOR Operator (Advanced) ---");
+let p = 7;
+let q = 14;
+console.log("Before swap: p =", p, "q =", q);
+
+p = p ^ q;      // XOR operation
+q = p ^ q;
+p = p ^ q;
+
+console.log("After swap:  p =", p, "q =", q);
+console.log();
+```
+
+**Real-World Application: Sorting Algorithm Foundation**
+```javascript
+// Bubble Sort uses swapping to arrange elements
+const numbers = [5, 2, 8, 1, 9];
+console.log("--- Real-World: Array Sorting ---");
+console.log("Original array:", numbers);
+
+// Simple swap to demonstrate sorting
+if (numbers[0] > numbers[1]) {
+    // Swap first two elements if first is greater
+    [numbers[0], numbers[1]] = [numbers[1], numbers[0]];
+}
+
+console.log("After swap:", numbers);
+```
+
+**Practice Challenges:**
+```javascript
+// Challenge 1: Swap three variables in circular manner
+// a -> b, b -> c, c -> a
+let var1 = "Apple";
+let var2 = "Banana";
+let var3 = "Cherry";
+console.log("Before:", var1, var2, var3);
+
+// Your code here: Rotate values
+[var1, var2, var3] = [var3, var1, var2];
+
+console.log("After: ", var1, var2, var3);
+// Expected: Cherry Apple Banana
+
+// Challenge 2: Swap first and last elements of an array
+const fruits = ["Apple", "Banana", "Cherry", "Date", "Elderberry"];
+console.log("Before:", fruits);
+
+[fruits[0], fruits[fruits.length - 1]] = [fruits[fruits.length - 1], fruits[0]];
+
+console.log("After: ", fruits);
+// Expected: ["Elderberry", "Banana", "Cherry", "Date", "Apple"]
+```
+
+**When to Use Each Method:**
+```
+Method 1 (Temporary Variable):
+✅ Most readable and recommended
+✅ Works with all data types
+✅ Used in professional code
+
+Method 2 (Arithmetic):
+⚠️ Only for numbers
+❌ Can cause overflow with large numbers
+✅ Good for interviews
+
+Method 3 (Destructuring):
+✅ Modern and concise
+✅ Preferred in ES6+ code
+✅ Works with any data type
+⚠️ Requires ES6 support
+
+Method 4 (XOR):
+⚠️ Only for integers
+❌ Hard to read
+✅ Space efficient (no temp variable)
+❌ Avoid in production code
+```
+
 ---
 
 ## 🎓 Summary
